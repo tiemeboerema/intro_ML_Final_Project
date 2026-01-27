@@ -78,12 +78,23 @@ def create_new_df(data: list[list]) -> pd.DataFrame:
     Creates a new dataframe based on list data
     """
     columns = ["DATE", "MONTH", "CITY"] + measurements
-    df = pd.DataFrame(data, columns=columns)
 
-    return df.dropna()
+    # only use rows containing all measurements
+    df = pd.DataFrame(data, columns=columns).dropna()
+
+    # define the correct label for each row
+    df["PRECIPITATION Y/N"] = df["precipitation"] > 0
+
+    # drop the precipitation column to prevent leakage
+    df = df.drop("precipitation", axis=1)
+
+    return df
 
 
 def main() -> None:
+    """
+    Creates a dataframe in the desired format and exports it as CSV
+    """
     df_data = pd.read_csv("datasets/weather_prediction_dataset.csv")
 
     new_rows = []
