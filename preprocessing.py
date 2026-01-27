@@ -86,9 +86,6 @@ def create_new_df(data: list[list]) -> pd.DataFrame:
 def main() -> None:
     df_data = pd.read_csv("datasets/weather_prediction_dataset.csv")
 
-    # initialize new dataframe
-    processed_df = pd.DataFrame()
-
     new_rows = []
     for idx, row in df_data.iterrows():
         for city in cities:
