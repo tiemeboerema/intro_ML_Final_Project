@@ -62,7 +62,7 @@ def convert_row(row: pd.Series, city: str) -> list[np.float64]:
     corresponding to this city in the given row, and creates a new row
     based on these measurements.
     """
-    new_row = [row["DATE"], row["MONTH"]]
+    new_row = [row["DATE"], row["MONTH"], city]
     for measurement in measurements:
         col_name = city + "_" + measurement
         if col_name not in row:
@@ -77,10 +77,10 @@ def create_new_df(data: list[list]) -> pd.DataFrame:
     """
     Creates a new dataframe based on list data
     """
-    columns = ["DATE", "MONTH"] + measurements
+    columns = ["DATE", "MONTH", "CITY"] + measurements
     df = pd.DataFrame(data, columns=columns)
 
-    return df
+    return df.dropna()
 
 
 def main() -> None:
