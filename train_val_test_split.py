@@ -9,26 +9,33 @@ Description:
 """
 
 import pandas as pd
-from sklearn.model_selection import train_test_split
 
 
-def train_val_test_split(data: pd.DataFrame) -> tuple[pd.Dataframe]:
+def train_val_test_split(data):
     """
     Splits a given dataset into a training, validation, and a test set.
     Assumes the labels are the last column of the dataframe, and returns
     a non-shuffled 60-20-20 training-validation-test split.
     """
     # extract features and labels separately
-    features = data.iloc[:, :-1]
-    labels = data.iloc[:, -1:]
+    X = data.iloc[:, :-1]
+    y = data.iloc[:, -1:]
 
-    # do two train_test_splits in order to create train/val/test sets
-    X_train_val, X_test, y_train_val, y_test = train_test_split(
-        features, labels, test_size=0.2, random_state=42, shuffle=False
-    )
+    # We split by these dates
+    training_end = 20060101.0
+    val_end = 20080101.0
 
-    X_train, X_val, y_train, y_val = train_test_split(
-        X_train_val, y_train_val, test_size=0.25, random_state=42, shuffle=False
-    )
+    # We cannot use train_test split since then we have data from the same
+    # day overlapping in the training, test and val set which can cause leakage
+    train_index = X["DATE"] < training_end
+    val_index = (X["DATE"] >= training_end) & (X["DATE"] < val_end)
+    test_index = X["DATE"] >= val_end
 
+    X_train, y_train = X[train_index], y[train_index]
+    X_val, y_val = X[val_index], y[val_index]
+    X_test, y_test = X[test_index], y[test_index]
+
+    X_train = X_train.drop(columns=["DATE"])
+    X_val = X_val.drop(columns=["DATE"])
+    X_test = X_test.drop(columns=["DATE"])
     return X_train, X_val, X_test, y_train, y_val, y_test
