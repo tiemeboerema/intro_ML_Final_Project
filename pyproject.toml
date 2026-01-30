@@ -3,9 +3,10 @@ name = "final-project"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.4.1",
     "pandas>=3.0.0",
     "scikit-learn>=1.8.0",
+    "tensorflow>=2.20.0",
 ]

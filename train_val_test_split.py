@@ -8,8 +8,6 @@ Description:
 
 """
 
-import pandas as pd
-
 
 def train_val_test_split(data):
     """
@@ -38,4 +36,5 @@ def train_val_test_split(data):
     X_train = X_train.drop(columns=["DATE"])
     X_val = X_val.drop(columns=["DATE"])
     X_test = X_test.drop(columns=["DATE"])
+
     return X_train, X_val, X_test, y_train, y_val, y_test
