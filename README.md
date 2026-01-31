@@ -13,6 +13,7 @@ cd intro_ML_Final_Project
 
 ```
 uv sync
+source .venv/bin/activate
 ```
 
 <h3> 2b - otherwise, create a virtual environment and install the dependencies </h3>

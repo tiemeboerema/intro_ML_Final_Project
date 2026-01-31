@@ -225,11 +225,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "matplotlib", specifier = ">=3.10.8" },
-    { name = "numpy", specifier = ">=2.4.1" },
-    { name = "pandas", specifier = ">=3.0.0" },
-    { name = "scikit-learn", specifier = ">=1.8.0" },
-    { name = "tensorflow", specifier = ">=2.20.0" },
+    { name = "matplotlib", specifier = "==3.10.8" },
+    { name = "numpy", specifier = "==2.4.1" },
+    { name = "pandas", specifier = "==3.0.0" },
+    { name = "scikit-learn", specifier = "==1.8.0" },
+    { name = "tensorflow", specifier = "==2.20.0" },
 ]
 
 [[package]]
