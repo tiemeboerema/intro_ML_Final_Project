@@ -6,6 +6,7 @@ In this assignment, we aim to create a machine learning model that is able to co
 
 ```
 git clone https://github.com/tiemeboerema/intro_ML_Final_Project
+cd intro_ML_Final_Project
 ```
 
 <h3> 2a - If using a uv environment </h3>
